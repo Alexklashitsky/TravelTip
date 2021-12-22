@@ -9,5 +9,10 @@ function getWetherAtPlace(lat = 32.0749831, lng = 34.9120554) {
   console.log(url);
   return fetch(url)
     .then((data) => data.json())
-    .then((wether) => parseInt(wether.main.temp - 273.15));
+    .then((wether) => wether);
+}
+
+function getFourDaysWeather(pos)
+{
+  
 }

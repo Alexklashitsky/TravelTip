@@ -9,6 +9,7 @@ window.onGetLocs = onGetLocs;
 window.onGetUserPos = onGetUserPos;
 window.onMapClick = onMapClick;
 window.onAddLocation = onAddLocation;
+window.onSearchLocation = onSearchLocation;
 
 function onInit() {
   mapService
@@ -60,25 +61,59 @@ function onGetUserPos() {
       console.log("err!!!", err);
     });
 }
-function onPanTo() {
-  // console.log('Panning the Map');
-  mapService.panTo(35.6895, 139.6917);
+function onPanTo(loc) {
+  console.log("Panning the Map");
+  let idx = locService.getIdxById(loc.dataset.id);
+
+  let pos = locService.getLocPos(idx);
+  console.log("id:", pos);
+  // let Idx = loc.loc.Service.getIdxById(id)
+  mapService.panTo(pos.lat, pos.lng);
+}
+
+function onDeleteLocation(loc) {
+  let id = locService.getIdxById(loc.dataset.id);
+  locService.deleteLoc(id);
+}
+function renderLocs() {
+  var locs = locService.getLocs();
+  var strHtml = "";
+  let elTable = document.querySelector(".tbody");
+  locs.map((loc) => {
+    strHtml += `<tr>
+        <td>${loc.name}</td>
+        <td>${loc.weather}</td>
+        <td>${loc.createAt}</td>
+        <td>
+            <button onclick="onPanTo(this)" data-id="${loc.id}" class="btn-pan">GO</button>
+            <button onclick="onDeleteLocation(this)" data-id="${loc.id}" class="delete-btn">
+                Delete
+            </button>
+        </td>
+    </tr>`;
+  });
+
+  elTable.innerHTML = strHtml;
+}
+
+function toggleModal() {
+  var elModal = document.querySelector(".modal");
+  elModal.classList.toggle("closed");
+  document.body.classList.toggle("modal-open");
 }
 
 function onMapClick() {
   toggleModal();
 }
 
-function toggleModal() {
-  document.body.classList.toggle("modal-open");
-  var elModal = document.querySelector(".modal");
-  elModal.classList.toggle("closed");
-}
-
 function onAddLocation(ev) {
   ev.preventDefault();
-  var elNameInput = document.querySelector(".loc-name");
-  var name = elNameInput.value;
-  ws.getWetherAtPlace().then();
+  var name = document.querySelector(".loc-name").value;
+  ws.getWetherAtPlace().then((weather) => {
+    var temp =weather.main.temp-273.15;
+    var lat = weather.coords.lat;
+    var lng = weather.coords.lon;
+    locService.createLocs(name,lat,lng,temp);
+  });
   toggleModal();
 }

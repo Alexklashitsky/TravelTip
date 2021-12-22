@@ -1,4 +1,5 @@
 const API_KEY = "AIzaSyATpTLQzpgyRlCQDLtoeO6FLafzcSw_VQc";
+import {  } from "./loc.service.js";
 export const mapService = {
   initMap,
   addMarker,
@@ -16,6 +17,11 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
       center: { lat, lng },
       zoom: 15,
     });
+    // gMap.addListener("click", (e) => {
+    //   var pos = e.latLng;
+
+    //   //here you need call the function that makes new location and open the modal to get the name. also you need to call the getWeather at place function to get the weather;
+    // });
     console.log("Map!", gMap);
   });
 }
