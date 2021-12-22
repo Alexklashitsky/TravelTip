@@ -1,19 +1,29 @@
 import { locService } from './services/loc.service.js'
 import { mapService } from './services/map.service.js'
-
 window.onload = onInit;
 window.onAddMarker = onAddMarker;
 window.onPanTo = onPanTo;
 window.onGetLocs = onGetLocs;
 window.onGetUserPos = onGetUserPos;
+// window.onload = renderLocs;
+
+
 
 function onInit() {
     mapService.initMap()
         .then(() => {
             console.log('Map is ready');
+            renderLocs()
+
         })
         .catch(() => console.log('Error: cannot init map'));
+
 }
+
+
+
+
+
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
 function getPosition() {
@@ -57,7 +67,40 @@ function onGetUserPos() {
             console.log('err!!!', err);
         })
 }
-function onPanTo() {
+function onPanTo(loc) {
     console.log('Panning the Map');
-    mapService.panTo(35.6895, 139.6917);
+    let idx = locService.getIdxById(loc.dataset.id)       //
+
+    let pos = locService.getLocPos(idx)
+    console.log('id:', pos)
+    // let Idx = loc.loc.Service.getIdxById(id)
+    mapService.panTo(pos.lat, pos.lng);
+}
+function onDeleteLocation(loc) {
+    let idx = locService.getIdxById(loc.dataset.id)
+    locService.deleteLoc(idx)
+
+
+}
+function renderLocs() {
+    var locs = locService.getLocs()
+    var strHtml = ''
+    let elTable = document.querySelector('.tbody')
+    locs.map((loc) => {
+        strHtml += `<tr>
+        <td>${loc.name}</td>
+        <td>${loc.weather}</td>
+        <td>${loc.createAt}</td>
+        <td>
+            <button onclick="onPanTo(this)" data-id="${loc.id}" class="btn-pan">GO</button>
+            <button onclick="onDeleteLocation(this)" data-id="${loc.id}" class="delete-btn">
+                Delete
+            </button>
+        </td>
+    </tr>`
+    })
+
+    elTable.innerHTML = strHtml
+
+
 }

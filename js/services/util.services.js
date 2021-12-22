@@ -1,6 +1,7 @@
 export const moduleUtil = {
     getRandomInt,
-    makeId
+    makeId,
+    timeStampToDate
 }
 
 
@@ -17,4 +18,8 @@ function makeId(length = 6) {
         txt += possible.charAt(Math.floor(Math.random() * possible.length));
     }
     return txt;
+}
+
+function timeStampToDate(time) {
+    return new Date(time)
 }
