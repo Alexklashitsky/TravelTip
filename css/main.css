@@ -1,0 +1,57 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100%;
+  background-color: rgb(126, 213, 251);
+}
+
+/* BASICS */
+
+button {
+  cursor: pointer;
+}
+
+
+
+/* HEADER */
+
+header{
+    background-color: antiquewhite;
+}
+
+.header-content{
+    max-width: 980px;
+    margin: auto;
+}
+
+.header-search{
+    width: 50%;
+    justify-content: space-around;
+}
+
+.header-search button{
+    background-color: rgb(36, 103, 162);
+    border: 0px;
+    border-radius: 10px;
+    height: 100%;
+    width: 80px;
+}
+
+
+
+
+/* HELPER */
+
+header{
+    align-items: center;
+}
+
+.flex {
+  display: flex;
+}
+
+.space-between{
+    justify-content: space-between;
+}
