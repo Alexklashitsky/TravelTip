@@ -11,7 +11,7 @@ export const locService = {
 };
 const KEY = "locDB";
 
-const locs = [
+const locs = moduleStorage.loadFromStorage(KEY) || [
   {
     id: "1234",
     name: "Greatplace",
@@ -34,16 +34,16 @@ function getLocs() {
 
 function createLocs(name, lat, lng, temp) {
   const loc = {
-    id: util.services.makeID(),
+    id: moduleUtil.makeId(4),
     name,
     lat,
     lng,
     temp,
-    createAt: util.services.timeStampToDate(Date.now()),
-    modifiedAt: util.services.timeStampToDate(Date.now()),
+    createAt: moduleUtil.timeStampToDate(Date.now()),
+    modifiedAt: moduleUtil.timeStampToDate(Date.now()),
   };
   locs.push(loc);
-  saveToStorage(KEY, locs);
+  moduleStorage.saveToStorage(KEY, locs);
 }
 
 function getIdxById(id) {
@@ -54,6 +54,7 @@ function getIdxById(id) {
 }
 
 function getLocPos(idx) {
+  console.log(idx);
   let pos = {
     lat: locs[idx].lat,
     lng: locs[idx].lng,
@@ -61,7 +62,6 @@ function getLocPos(idx) {
   return pos;
 }
 function deleteLoc(id) {
-  var idx = locs.findIndex((loc) => loc.id === id);
-  locs.splice(idx, 1);
-  saveToStorage(KEY, locs);
+  locs.splice(id, 1);
+  moduleStorage.saveToStorage(KEY, locs);
 }

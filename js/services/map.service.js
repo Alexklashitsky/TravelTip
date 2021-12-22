@@ -1,5 +1,6 @@
 const API_KEY = "AIzaSyATpTLQzpgyRlCQDLtoeO6FLafzcSw_VQc";
-import {  } from "./loc.service.js";
+import {} from "./loc.service.js";
+import { appController } from "../app.controller.js";
 export const mapService = {
   initMap,
   addMarker,
@@ -17,12 +18,13 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
       center: { lat, lng },
       zoom: 15,
     });
-    // gMap.addListener("click", (e) => {
-    //   var pos = e.latLng;
-
-    //   //here you need call the function that makes new location and open the modal to get the name. also you need to call the getWeather at place function to get the weather;
-    // });
-    console.log("Map!", gMap);
+    gMap.addListener("click", (mapsMouseEvent) => {
+      var pos = {
+        lat: mapsMouseEvent.latLng.lat(),
+        lng: mapsMouseEvent.latLng.lng(),
+      };
+      appController.onMapClick(pos);
+    });
   });
 }
 
@@ -41,11 +43,8 @@ function panTo(lat, lng) {
 }
 
 function getLocation() {
-  console.log("test");
-  // let showPosition
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition);
-    console.log("showPosition:", showPosition);
   } else {
     alert("Geolocation is not supported by this browser.");
   }
@@ -55,10 +54,7 @@ function showPosition(position) {
   var x = position.coords.latitude;
   var y = position.coords.longitude;
   const currPos = { lat: x, lng: y };
-  const map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 16,
-    center: currPos,
-  });
+  gMap.panTo(currPos);
 }
 
 function _connectGoogleApi() {
