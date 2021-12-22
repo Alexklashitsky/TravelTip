@@ -3,7 +3,8 @@ const API_KEY = 'AIzaSyATpTLQzpgyRlCQDLtoeO6FLafzcSw_VQc'
 export const mapService = {
     initMap,
     addMarker,
-    panTo
+    panTo,
+    // getLocation
 }
 
 var gMap;
@@ -35,6 +36,33 @@ function panTo(lat, lng) {
     var laLatLng = new google.maps.LatLng(lat, lng);
     gMap.panTo(laLatLng);
 }
+
+
+
+// function getLocation() {
+//     console.log('test');
+//     if (navigator.geolocation) {
+//         navigator.geolocation.getCurrentPosition(showPosition);
+//     } else {
+//         alert("Geolocation is not supported by this browser.");
+//     }
+// }
+
+
+
+// function showPosition(position) {
+//     var x = position.coords.latitude
+//     var y = position.coords.longitude;
+//     console.log('x:', x);
+//     console.log('y:', y);
+//     const currPos = { lat: x, lng: y }
+//     const map = new google.maps.Map(document.getElementById("map"), {
+//         zoom: 14,
+//         mapId: '2e3402a22c68e1bf',
+
+//         center: currPos,
+//     });
+// }
 
 
 
