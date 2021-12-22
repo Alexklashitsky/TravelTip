@@ -1,10 +1,10 @@
-import { moduleUtil } from `./util.services.js`
-import { moduleStorage } from `./storage.services.js`
+import { moduleUtil } from './util.services.js'
+import { moduleStorage } from './storage.services.js'
 
 export const locService = {
     getLocs
 }
-const KEY = locDB
+const KEY = 'locDB'
 
 
 
@@ -32,7 +32,8 @@ function createLocs(name, lat, lng, weather) {
         createAt: Date.now(),
         modifiedAt: Date.now()
     }
-    locs.push
+    locs.push(loc)
+    saveToStorage(KEY, locs)
 
 }
 
