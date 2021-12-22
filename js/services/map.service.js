@@ -4,7 +4,7 @@ export const mapService = {
     initMap,
     addMarker,
     panTo,
-    // getLocation
+    getLocation
 }
 
 var gMap;
@@ -21,6 +21,8 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             })
             console.log('Map!', gMap);
         })
+
+
 }
 
 function addMarker(loc) {
@@ -39,30 +41,33 @@ function panTo(lat, lng) {
 
 
 
-// function getLocation() {
-//     console.log('test');
-//     if (navigator.geolocation) {
-//         navigator.geolocation.getCurrentPosition(showPosition);
-//     } else {
-//         alert("Geolocation is not supported by this browser.");
-//     }
-// }
+function getLocation() {
+    console.log('test');
+    // let showPosition
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+        console.log('showPosition:', showPosition);
+
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+}
 
 
 
-// function showPosition(position) {
-//     var x = position.coords.latitude
-//     var y = position.coords.longitude;
-//     console.log('x:', x);
-//     console.log('y:', y);
-//     const currPos = { lat: x, lng: y }
-//     const map = new google.maps.Map(document.getElementById("map"), {
-//         zoom: 14,
-//         mapId: '2e3402a22c68e1bf',
+function showPosition(position) {
+    var x = position.coords.latitude
+    var y = position.coords.longitude;
+    console.log('x:', x);
+    console.log('y:', y);
+    const currPos = { lat: x, lng: y }
+    const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 14,
+        // mapId: '2e3402a22c68e1bf',
 
-//         center: currPos,
-//     });
-// }
+        center: currPos,
+    });
+}
 
 
 

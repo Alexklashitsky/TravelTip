@@ -37,13 +37,14 @@ function onGetLocs() {
 }
 
 function onGetUserPos() {
+    mapService.getLocation()
+
     getPosition()
         .then(pos => {
             console.log('User position is:', pos.coords);
             const currPos = { lat: pos.coords.latitude, lng: pos.coords.longitude }
             const map = new google.maps.Map(document.getElementById("map"), {
                 zoom: 14,
-                // mapId: '2e3402a22c68e1bf',
 
                 center: currPos,
             });
