@@ -7,6 +7,17 @@
     <title>TravelTip</title>
   </head>
   <body>
+    <div class="modal closed">
+      <form onsubmit="onAddLocation(event)">
+        <label for="location-name"
+          >Enter location's name:
+          <input class="loc-name" type="text" placeholder="Location"
+        /></label>
+        <button type="submit">✓</button>
+      </form>
+    </div>
+    <div class="main-screen"></div>
+
     <header>
       <div class="header-content flex space-between">
         <h1>TravelTip</h1>
@@ -31,7 +42,7 @@
     <main>
       <div class="main-layout flex space-between">
         <div class="location-infos">
-          <p class="location-name">Location: Harlem, New York</p>
+          <p class="curr-location-name">Location: Harlem, New York</p>
           <table border="1px" class="location-table">
             <thead>
               <th>Location</th>
@@ -98,13 +109,16 @@
             </tbody>
           </table>
         </div>
-        <div id="map" style="width: 50%; height: 400px"></div>
+        <div
+          onclick="onMapClick()"
+          id="map"
+          style="width: 50%; height: 400px"
+        ></div>
       </div>
     </main>
     <!-- <button onclick="onAddMarker()" class="btn-add-marker">
       Add Marker Speific Location
     </button> -->
-    <!-- <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button> -->
     <script type="module" src="js/app.controller.js"></script>
   </body>
 </html>
