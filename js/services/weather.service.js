@@ -12,7 +12,6 @@ function getWetherAtPlace(lat = 32.0749831, lng = 34.9120554) {
     .then((wether) => wether);
 }
 
-function getFourDaysWeather(pos)
-{
+function getWeeklyWeather(pos) {
   
 }
