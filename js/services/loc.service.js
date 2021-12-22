@@ -8,6 +8,7 @@ export const locService = {
   getLocPos,
   deleteLoc,
   createLocs,
+
 };
 const KEY = "locDB";
 
@@ -64,4 +65,9 @@ function deleteLoc(id) {
   var idx = locs.findIndex((loc) => loc.id === id);
   locs.splice(idx, 1);
   moduleStorage.saveToStorage(KEY, locs);
+}
+function searchLocation(value) {
+  const searchBox = new google.maps.places.SearchBox(value);
+
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(value)
 }

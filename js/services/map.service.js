@@ -1,10 +1,11 @@
 const API_KEY = "AIzaSyATpTLQzpgyRlCQDLtoeO6FLafzcSw_VQc";
-import {  } from "./loc.service.js";
+import { } from "./loc.service.js";
 export const mapService = {
   initMap,
   addMarker,
   panTo,
   getLocation,
+  searchLocation
 };
 
 var gMap;
@@ -65,7 +66,7 @@ function _connectGoogleApi() {
   if (window.google) return Promise.resolve();
   const API_KEY = ""; //TODO: Enter your API Key
   var elGoogleApi = document.createElement("script");
-  elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyATpTLQzpgyRlCQDLtoeO6FLafzcSw_VQc`;
+  elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyATpTLQzpgyRlCQDLtoeO6FLafzcSw_VQc&libraries=places`;
   elGoogleApi.async = true;
   document.body.append(elGoogleApi);
 
@@ -73,4 +74,16 @@ function _connectGoogleApi() {
     elGoogleApi.onload = resolve;
     elGoogleApi.onerror = () => reject("Google script failed to load");
   });
+}
+function searchLocation(value) {
+  console.log('ffdfd');
+
+
+  const searchBox = new google.maps.places.SearchBox(value);
+  console.log('searchBox:', searchBox);
+
+
+
+
+  // map.controls[google.maps.ControlPosition.TOP_LEFT].push(value)
 }

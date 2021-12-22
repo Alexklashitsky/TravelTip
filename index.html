@@ -1,57 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/main.css" />
-    <title>TravelTip</title>
-  </head>
-  <body>
-    <div class="modal closed">
-      <form onsubmit="onAddLocation(event)">
-        <label for="location-name"
-          >Enter location's name:
-          <input class="loc-name" type="text" placeholder="Location"
-        /></label>
-        <button type="submit">✓</button>
-      </form>
-    </div>
-    <div class="main-screen"></div>
 
-    <header>
-      <div class="header-content flex space-between">
-        <h1>TravelTip</h1>
-        <div class="header-search flex">
-          <label>
-            <input
-              type="text"
-              class="search-location"
-              placeholder="Enter Location"
-            />
-            <button class="search-btn" onclick="onSearchLocation()">GO</button>
-          </label>
-          <button class="my-location-btn" onclick="onGetUserPos()">
-            My Location
-          </button>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/main.css" />
+  <title>TravelTip</title>
+</head>
+
+<body>
+  <div class="modal closed">
+    <form onsubmit="onAddLocation(event)">
+      <label for="location-name">Enter location's name:
+        <input class="loc-name" type="text" placeholder="Location" /></label>
+      <button type="submit">✓</button>
+    </form>
+  </div>
+  <div class="main-screen"></div>
+
+  <header>
+    <div class="header-content flex space-between">
+      <h1>TravelTip</h1>
+      <div class="header-search flex">
+        <label>
+          <input type="text" class="search-location" name="search-location" placeholder="Enter Location" />
+          <button class="search-btn" onclick="onSearchLocation()">GO</button>
+        </label>
+        <button class="my-location-btn" onclick="onGetUserPos()">
+          My Location
+        </button>
       </div>
-    </header>
+    </div>
+  </header>
 
-    <div class="weather-div main-layout"></div>
+  <div class="weather-div main-layout"></div>
 
-    <main>
-      <div class="main-layout flex space-between">
-        <div class="location-infos">
-          <p class="curr-location-name">Location: Harlem, New York</p>
-          <table border="1px" class="location-table">
-            <thead>
-              <th>Location</th>
-              <th>Weather-Now</th>
-              <th>Created At</th>
-              <th>Actions</th>
-            </thead>
-            <tbody>
-              <!-- <tr>
+  <main>
+    <div class="main-layout flex space-between">
+      <div class="location-infos">
+        <p class="curr-location-name">Location: Harlem, New York</p>
+        <table border="1px" class="location-table">
+          <thead>
+            <th>Location</th>
+            <th>Weather-Now</th>
+            <th>Created At</th>
+            <th>Actions</th>
+          </thead>
+          <tbody>
+            <!-- <tr>
                 <td>Tel Aviv</td>
                 <td>32c</td>
                 <td>1/1/2022</td>
@@ -106,19 +102,17 @@
                   </button>
                 </td>
               </tr> -->
-            </tbody>
-          </table>
-        </div>
-        <div
-          onclick="onMapClick()"
-          id="map"
-          style="width: 50%; height: 400px"
-        ></div>
+          </tbody>
+        </table>
       </div>
-    </main>
-    <!-- <button onclick="onAddMarker()" class="btn-add-marker">
+      <div onclick="onMapClick()" id="map" style="width: 50%; height: 400px"></div>
+    </div>
+  </main>
+  <!-- <button onclick="onAddMarker()" class="btn-add-marker">
       Add Marker Speific Location
     </button> -->
-    <script type="module" src="js/app.controller.js"></script>
-  </body>
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATpTLQzpgyRlCQDLtoeO6FLafzcSw_VQc&callback=initAutocomplete&libraries=places&v=weekly"async></script> -->
+  <script type="module" src="js/app.controller.js"></script>
+</body>
+
 </html>

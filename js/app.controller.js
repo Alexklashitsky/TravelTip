@@ -10,14 +10,15 @@ window.onGetUserPos = onGetUserPos;
 window.onMapClick = onMapClick;
 window.onAddLocation = onAddLocation;
 window.onDeleteLoc = onDeleteLoc
-// window.onSearchLocation = onSearchLocation;
+window.onSearchLocation = onSearchLocation;
 
 function onInit() {
     mapService
         .initMap()
-    renderLocs()
         .then(() => {
             console.log("Map is ready");
+            renderLocs()
+
         })
         .catch(() => console.log("Error: cannot init map"));
 }
@@ -119,4 +120,13 @@ function onAddLocation(ev) {
         locService.createLocs(name, lat, lng, temp);
     });
     toggleModal();
+}
+function onSearchLocation() {
+    let locSearch = document.querySelector('[name=search-location]').value
+    console.log('value:', locSearch);
+    mapService.searchLocation(locSearch)
+
+
+
+
 }
