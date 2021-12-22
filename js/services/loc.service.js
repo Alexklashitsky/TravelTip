@@ -63,5 +63,5 @@ function getLocPos(idx) {
 function deleteLoc(id) {
   var idx = locs.findIndex((loc) => loc.id === id);
   locs.splice(idx, 1);
-  saveToStorage(KEY, locs);
+  moduleStorage.saveToStorage(KEY, locs);
 }
