@@ -1,12 +1,12 @@
 const API_KEY = "AIzaSyATpTLQzpgyRlCQDLtoeO6FLafzcSw_VQc";
-import { } from "./loc.service.js";
+import {} from "./loc.service.js";
 import { appController } from "../app.controller.js";
 export const mapService = {
   initMap,
   addMarker,
   panTo,
   getLocation,
-  searchLocation
+  searchLocation,
 };
 
 var gMap;
@@ -60,26 +60,29 @@ function showPosition(position) {
 
 function _connectGoogleApi() {
   if (window.google) return Promise.resolve();
-  const API_KEY = ""; //TODO: Enter your API Key
+  const API_KEY = "AIzaSyCzuZp75Yeu8Eh4TD1RtRYO3Cxs-R5wNwo"; //TODO: Enter your API Key
   var elGoogleApi = document.createElement("script");
   elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyATpTLQzpgyRlCQDLtoeO6FLafzcSw_VQc&libraries=places`;
   elGoogleApi.async = true;
   document.body.append(elGoogleApi);
-
   return new Promise((resolve, reject) => {
     elGoogleApi.onload = resolve;
     elGoogleApi.onerror = () => reject("Google script failed to load");
   });
 }
 function searchLocation(value) {
-  console.log('ffdfd');
-
-
-  const searchBox = new google.maps.places.SearchBox(value);
-  console.log('searchBox:', searchBox);
-
-
-
-
-  // map.controls[google.maps.ControlPosition.TOP_LEFT].push(value)
+  var geocoder = new google.maps.Geocoder();
+  geocoder.geocode({ address: value }, function (results, status) {
+    console.log(status)
+    if (status === google.maps.GeocoderStatus.OK) {
+      alert(
+        "location : " +
+          results[0].geometry.location.lat() +
+          " " +
+          results[0].geometry.location.lng()
+      );
+    } else {
+      alert("Something got wrong " + status);
+    }
+  });
 }
